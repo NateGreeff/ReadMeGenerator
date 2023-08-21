@@ -1,7 +1,8 @@
+//import inquirer and fs
 const inquirer = require('inquirer')
 const fs = require('fs')
 
-// TODO: Create an array of questions for user input
+// array of questions for user
 const questions = [
     {
         name: 'title',
@@ -62,18 +63,21 @@ const questions = [
     },
 ]
 
-
+// function to write README file
 function writeToFile(fileName, data) {
     fs.writeFile(fileName, data, (err) =>
         err ? console.error(err) : console.log('Success!')
     )
 }
-//Todo: Create a badge based on which license is chosen
+
+// function to initialize program
 function init() {
+    //prompt user with questions
     inquirer.prompt(questions).then((response) => {
-        let readMe = `# ${response.title}\n\n`
-        readMe += `![License](https://img.shields.io/badge/License-${response.license}-blue.svg)\n\n`
-        if (response.description) readMe += `## Description\n\n${response.description}\n`
+        let readMe = `# ${response.title}\n\n` //Title
+        readMe += `![License](https://img.shields.io/badge/License-${response.license}-blue.svg)\n\n` //License badge
+        if (response.description) readMe += `## Description\n\n${response.description}\n` //Description
+        //Table of contents
         if (response.features.includes('Table of Contents')) var tableOfContents = true
         if (tableOfContents) readMe += `\n## Table of Contents\n\n`
         if (response.installation && tableOfContents) readMe += `* [Installation](#installation)\n`
@@ -82,6 +86,7 @@ function init() {
         if (response.contribution && tableOfContents) readMe += `* [Contributing](#contributing)\n`
         if (response.test && tableOfContents) readMe += `* [Tests](#tests)\n`
         if (response.github || response.email && tableOfContents) readMe += `* [Questions](#questions)\n`
+        //Sections
         if (response.installation) readMe += `## Installation\n\n${response.installation}\n\n`
         if (response.usage) readMe += `## Usage\n\n${response.usage}\n`
         if (response.license !== 'None') readMe += `\n## License\n\nThis project is covered under the ${response.license} license.\n\n`
