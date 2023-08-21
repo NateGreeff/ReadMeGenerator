@@ -29,6 +29,9 @@ You will be asked a series of questions and instructions in the terminal.
 
 Make sure to save any external editor text before closing the external editor.
 
+[Usage Video](https://youtu.be/btK0OE4bL0M)
+
+
 ## License
 
 This project is covered under the MIT license.
